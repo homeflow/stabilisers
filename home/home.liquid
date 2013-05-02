@@ -1,0 +1,30 @@
+      <div class="hero-unit">
+        <h1>{{agency.hot_property.display_address}}</h1>
+        <p>{{agency.hot_property.short_description}}</p>
+        <p><a href="{{agency.hot_property | url_for_property}}" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+      </div>
+
+      <div class="row">
+        <div class="span4">
+          <h2><i class="icon-twitter"></i> Latest Tweets</i></h2>
+          {% twitter_user_timeline screen_name : agency.twitter_screen_name %}
+            {% for tweet in tweets limit:3 %}
+              <p>{{ tweet.text | auto_link }}  {{ tweet.created_at | date: "%d %B" }}</p>
+            {% endfor %}
+          {% endtwitter_user_timeline %}
+        </div>
+        <div class="span4">
+          <h2><i class="icon-book"></i> Latest News</i></h2>
+          {% for article in agency.articles limit:3 %}
+           <p><a class="title" href="/articles/{{ article.slug }}">{{ article.title }}</a></span> {{ article.promo | truncate :115 }} <a href="/articles/{{ article.slug }}">Read more ></a></p>
+          {% endfor %}
+       </div>
+        <div class="span4">
+          <h2><i class="icon-comments"></i> Testimonials</h2>
+          {% for testimonial in agency.testimonials limit:1 %}
+          <p>
+            {{ testimonial.content | truncate: 300 }}
+          </p>
+          {% endfor %}
+        </div>
+      </div>

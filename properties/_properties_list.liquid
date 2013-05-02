@@ -1,0 +1,14 @@
+ <ul class='thumbnails'>
+    {%for property in properties %}
+      <li class="span8">
+        <div class="thumbnail row">
+          <img class='span4' src="{{ property.photos.first | url_for_property_asset : '260x180'}}" alt="">
+          <div class='span3'>
+            <h4>{{property.display_address}}</h4>
+            <p>{{property.price}}</p>
+            <p>{{property.short_description | truncate : 150}}</p>
+          </div>
+        </div>
+      </li>
+    {%endfor%}
+</ul>

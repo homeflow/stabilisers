@@ -1,0 +1,54 @@
+<div class="span3"> 
+      <div class="propertySearchBox" id="search_form">
+      <form action='/search' id='search' method='get' onsubmit="return false;" class="advanced">
+      <fieldset id="search-fields">
+        <legend>Refine Your Search</legend>
+        <input type='hidden' id ='place_id' name='place_id' value='{{place_id}}' class='search' / >
+
+        <div class="search_wrapper" id="row1">
+          <div class="search_row">        
+            <input data-provide="typeahead" class='search' placeholder='Town or Postcode' type="text" id='location' name="location" value="{{location_field}}" onUnfocus="this.theform.submit()"/>
+          </div>
+        </div>
+        <div class="search_wrapper" id="row2">
+          <div class="search_row">
+            <div>
+              <select id="min_beds" class="formelement_bg search" name='min_beds'>
+                <option value="" title="Min beds">Beds min</option>
+                <option value="1" title="1 Bed">1 bed</option>
+                <option value="2" title="2 Beds">2 beds</option>
+                <option value="3" title="3 Beds">3 beds</option>
+                <option value="4" title="4 Beds">4 beds</option>
+                <option value="5" title="5 Beds">5 beds +</option>
+              </select>
+
+              <select id="max_beds" class="formelement_bg search" name='max_beds'>
+                <option value="" title="Min beds">Beds max</option>
+                <option value="1" title="1 Bed">1 bed</option>
+                <option value="2" title="2 Beds">2 beds</option>
+                <option value="3" title="3 Beds">3 beds</option>
+                <option value="4" title="4 Beds">4 beds</option>
+                <option value="5" title="5 Beds">5 beds +</option>
+              </select>
+
+              <select id="min_price" class="formelement_bg search" name='min_price'>
+                <option value="" title="Min price">Price min</option>
+              </select> 
+
+              <select id="max_price" class="formelement_bg search" name='max_price'>
+                <option value="" title="Max price">Price max</option>
+              </select>
+
+              <select id="type" class="formelement_bg search" name='type'>
+                  <option value="" title="Max beds">Property type</option>
+                  {{ agency | tag_dropdown_list }}
+              </select>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+      <div class="submit">
+          <button onclick="Ctesius.Actions.submitSearchForm(); return false;" type="submit" class="btn">Search</button>
+      </div>
+    </form>
+  </div>

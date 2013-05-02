@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Bootstrap, from Twitter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    {{ "application" | javascript_include_tag }}
+    {{ "application" | stylesheet_link_tag }}
+    {{ "stabilisers" | theme_stylesheet_link_tag }}
+    {{ "font-awesome" | stylesheet_link_tag }}
+
+  </head>
+
+  <body>
+    {% include 'layouts/js_templates' %}
+
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="#"><img src='{{ agency.logo | url_for_agency_logo : "150x20R" }}'/></a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active"><a href="#">Home</a></li>
+            </ul>
+
+            <form id='search' class="navbar-form pull-right" onsubmit="Ctesius.Actions.submitSearchForm({channel:'sales'}); return false;">
+              <input type="text" id='location' placeholder="POSTCODE, STREET OR AREA"> 
+              <button onclick="Ctesius.Actions.submitSearchForm({channel:'lettings'}); return false;" type="submit" class="btn">Sales</button>
+              <button onclick="Ctesius.Actions.submitSearchForm({channel:'sales'}); return false;" type="submit" class="btn">Lettings</button>
+            </form>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container" style='margin-top:45px;'>
+      {{ content_for_layout }}
+    <hr>
+
+    <footer>
+      <p>&copy; Company 2013</p>
+    </footer>
+
+    <script type="text/javascript">
+      $(document).ready(function(){ 
+        Ctesius.init()
+      });
+    </script>
+
+    </div> <!-- /container -->
+
+  </body>
+</html>

@@ -1,0 +1,31 @@
+<div class="row">
+  {% include 'layouts/search_form' %}
+</div>
+
+<div class="span8 offset1">
+      <div class="row">
+          <h2> {{current_channel.dictionary.general_collective | capitalize}}  {{current_channel.dictionary.preposion}} {{search.geospacial_description}} <span> {{ location.name }}, {{ county.name }} </span> </h2>
+      </div>
+
+    <ul class="nav nav-tabs">
+        <li  id='tab_list'  class="active">
+          <a href="#home">List</a>
+        </li>
+        <li id='tab_map'>
+          <a href="#map">Map</a>
+        </li>
+    </ul>
+      
+    <div class='togglable_area' id='togglable_list'>
+        {% include 'properties/pagination' %}
+        {% include 'properties/properties_list' %}
+        {% include 'properties/pagination' %}
+    </div>
+
+
+    <div class='togglable_area hidden' id='togglable_map'>
+      <div id='draggable_map_view'>
+    
+      </div>
+    </div>
+</div>

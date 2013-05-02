@@ -1,0 +1,13 @@
+
+.hero-unit{
+  background-image:url('{{agency.hot_property.photos.first | url_for_property_asset : '1000x700' }}');
+  color:white;
+  text-shadow: 2px 2px 2px #000;
+}
+
+.ui-helper-hidden-accessible{
+  display:none;
+}
+
+.container{
+}
