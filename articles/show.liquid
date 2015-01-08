@@ -1,0 +1,20 @@
+<div class="article-show">
+  <h1>{{ article.title }}</h1>
+  {% if article.image %}
+  <a class="article-image-cb" href="{{ article.image | url_for_agency_logo }}">
+    <img src="{{ article.image | url_for_agency_logo }}" class="article-img" />
+  </a>
+  {% endif %}
+
+  {{ article.content }}
+
+  {% if article.author.name %}
+  <p>
+    <a href="/staff/{{article.author.url_label}}">
+      {{article.author.name}}, {{article.author.job_title}}
+    </a>
+    <br>
+  </p>
+  {% endif %}
+  <a href="/articles" class="view-more">View more articles &gt;</a>
+</div>

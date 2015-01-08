@@ -1,0 +1,7 @@
+<div id="{{cms_page.slug}}" class="cms_page">
+  <h1>{{cms_page.title}}</h1>
+  {% if cms_page.image %}
+    <img src="{{cms_page.image | url_for_generic_image}}" class="large_image" alt="">
+  {% endif %}
+  {{cms_page.content}}
+</div>
