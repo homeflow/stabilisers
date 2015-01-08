@@ -1,0 +1,19 @@
+<div class="container">
+  <h1>Meet the team</h1>
+</div>
+<div class="container cols">
+  <div class="row-fluid">
+    <ul class="thumbnails">
+      {% for branch in agency.branches %}
+        {% for staff_member in branch.staff_profiles %}
+            <a href="{{staff_member | url_for_staff_member}}">
+              <img src="{{staff_member.avatar | url_for_generic_image : "215x_"}}" alt="{{staff_member.name}}" class="staff-pic" data-pin-no-hover="true"/>
+            </a>
+            <p>{{staff_member.short_bio | truncate : 600 }}</p>
+          <a href="{{staff_member | url_for_staff_member}}">Full Profile</a>
+        </div>
+        {% endfor %}
+      {% endfor %}
+    </ul>
+  </div>
+</div>

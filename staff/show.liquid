@@ -1,0 +1,60 @@
+<div id="staff">
+  <div class="wrapper clearfix">
+    <div class="left">
+      <div id="bio_top">
+        <div class="half">
+
+          {% if staff_member.avatar %}
+          <img id="profile-image" src="{{ staff_member.avatar | url_for_staff_profile_avatar : "_x120" }}"/>
+          {% else %}
+          <img id="profile-image" src="http://www.homeflow.co.uk/global/images/admin/no_avatar.jpg" class="avatar" />
+          {% endif %}
+
+          <div id="staff_info">
+            <div class="name">{{staff_member.name}}</div>
+            <div class="name sub-heading">{{staff_member.job_title}}</div>
+            <div class="name sub-heading"><a href="{{branch | url_for_branch }}">{{branch.name}} office</a></div>
+            <div class="address">{{branch.address}}</div>
+            <div class="phone">
+              {% include 'staff/direct_dial' %}
+            </div>
+
+            <div class="social">
+              {% if staff_member.facebook_uri %}
+                <a href="#"><img src="{{ "facebook_50x50.png" | theme_image_url }}" width="21" height="21"></a>
+              {% endif %}
+              {% if staff_member.twitter_uri %}
+                <a href="#"><img src="{{ "twitter_50x50.png" | theme_image_url }}" width="21" height="21"></a>
+              {% endif %}
+              {% if staff_member.linkedin_uri %}
+                <a href="#"><img src="{{ "linkedin_50x50.png" | theme_image_url }}" width="21" height="21"></a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+        <div class="half right">
+          <p>{{staff_member.long_bio}}</p>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+
+      <div id="contact_container">
+        <h4>Contact {{ staff_member.first_name }}</h4>
+        {% include 'lead_forms/staff_show' %}
+      </div>
+
+      <div id="comments_container">
+        {% if staff_member.property_commments.first %}
+          <p class="header">Property comments</p>
+          {% for property in staff_member.property_commments %}
+            <div id="properties">
+              <div class="quote">“{{ property.comment }}”</div>
+              {% include 'properties/property_small'%}
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
