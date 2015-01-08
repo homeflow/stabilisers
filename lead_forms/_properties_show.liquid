@@ -1,0 +1,37 @@
+<form action="/properties/{{property.property_id}}/{{property.primary_channel}}/leads" id="contact_form" class="contact_form" method="post">
+  <div id='form_error'></div>
+
+  <div class="control-group">
+    <label class="text" for="firstname">First name</label>
+    <input id="firstname" class="required" name="lead_client[first_name]" type="text">
+
+    <label class="text" for="surname">Last name</label>
+    <input id="surname" class="required" name="lead_client[last_name]" type="text">
+  </div>
+
+  <div class="control-group">
+    <label class="text" for="email">Email</label>
+    <input id="email" class="required" name="lead_client[email]" type="email">
+  </div>
+
+  <div class="control-group">
+    <label class="text" for="telephone">Telephone</label>
+    <input id="telephone" name="lead_client[tel_home]" type="text">
+  </div>
+
+  <div class="control-group">
+    <label class="text" for="message">Message</label>
+    <textarea id="message" name="lead[message]" rows="3"></textarea>
+  </div>
+  <div class="control-group">
+    <p class="help_text">By submitting this form, you are agreeing to our website <a href="/pages/terms-of-use">terms and conditions</a>, and consenting to <a href="/pages/cookies">cookies</a> being stored on your computer.</p>
+  </div>
+  <div id="additionals" style="display:none;">
+    <input type="text" name="lead_client[body]" value="" />
+  </div>
+  <div class="control-group">
+    <div class="submit">
+      <input type="image" src="{{"submit.png" | theme_image_url }}" value="search">
+    </div>
+  </div>
+</form>

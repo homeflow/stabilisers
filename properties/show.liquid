@@ -1,0 +1,62 @@
+<script>
+  Ctesius.addConfig('skip_polygon', true)
+  Ctesius.addConfig('small_map_element', 'contact_map')
+</script>
+
+<div id="property_details">
+  <div class="left">
+    <h1>{{ property.display_address }}</h1>
+      <div class="property-media">
+        {% include 'properties/gallery_carousel' %}
+      </div>
+
+      <div id="price" class="property_details_{{ property.property_id }}">
+        {{ property.price }}
+        {% if property.primary_channel == 'lettings' %}
+          <span class="feetext">{{property.lettings_fee_text}}</span>
+        {% endif %}
+
+        {{ property.bedrooms_text}}
+
+      </div>
+
+      <div id="contact_map"></div>
+
+    {% if property.available_on %}<p><strong>Property available on:</strong> {{property.available_on}}</p>{% endif %}
+
+    {% unless property.features == empty %}
+      <ul id="points" class="clearfix">
+        {% for feature in property.features %}
+        <li>{{ feature }}</li>
+        {% endfor %}
+      </ul>
+    {% endunless %}
+
+    {% if property.description.size > 1200 %}
+      <div class='minified' id='min_details'>{{property.description}}</div>
+      <div class='expander' id='min_details_expander'><a href="javascript: $('#min_details').removeClass('minified'); $('#min_details').removeClass('minified');  $('#min_details_expander').hide(); void(0); "><strong><span style="font-size:14px;">Read more ></span></strong></a></div>
+    {% else %}
+      <div id='min_details'>{{property.description}}</div>
+    {% endif %}
+
+    <div id="contact_container">
+      <h4 id='contact-us'>Contact us about this property</h4>
+      {% include 'lead_forms/properties_show' %}
+    </div>
+
+    <div id="details_container">
+      {% assign similar_properties =  property | similar_properties %}
+
+      <script>Ctesius.appendConfig('properties', {% include_as_json properties/properties_list data: similar_properties target: properties %}.properties);</script>
+
+      {% if similar_properties.first %}
+        <h2>Similar properties</h2>
+        {% for property in properties limit: 2 %}
+          {% include 'properties/list_item'%}
+        {% endfor %}
+      {% endif %}
+    </div>
+
+  </div>
+
+</div>

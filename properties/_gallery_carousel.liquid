@@ -1,0 +1,20 @@
+<div id="this-carousel-id" class="carousel slide"><!-- class of slide for animation -->
+  <div class="carousel-inner">
+    {% for image in property.photos %}
+      <div class="item {% if forloop.first %}active{% endif %}">
+        <img src="{{ image | url_for_property_photo : "440x330" }}" alt="" />
+        <div class="carousel-caption">
+          <p>Caption text here</p>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <a class="carousel-control left" href="#this-carousel-id" data-slide="prev">&lsaquo;</a>
+  <a class="carousel-control right" href="#this-carousel-id" data-slide="next">&rsaquo;</a>
+</div>
+
+<script>
+  $(document).ready(function(){
+    $('.carousel').carousel();
+  });
+</script>

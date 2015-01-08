@@ -1,10 +1,10 @@
 <div class="pagination pagination-right">
-        <ul>
-          <li {% unless pagination.has_prev_page %}class="disabled"{%endunless%}><a href="{{pagination.previous_page_link}}">&laquo;</a></li>
-          {% for_pagination pagination previous: 4 after :4 %}
-                <li {% if pagination_item.page_number == pagination.current_page %} class='active' {% endif %}><a href="{{pagination_item.link}}">{{pagination_item.page_number}}</a> 
-          {% endfor_pagination %}
-          <li {% unless pagination.has_next_page %}class="disabled"{%endunless%}><a href="{{pagination.next_page_link}}">&raquo;</a></li>
-        </ul>
-        <p><small>{{pagination.total_count}} properties found</small></p>
+    <ul>
+      <li {% unless pagination.has_prev_page %}class="disabled"{%endunless%}><a href="{{pagination.previous_page_link}}">&laquo;</a></li>
+      {% for_pagination pagination previous: 4 after :4 %}
+            <li {% if pagination_item.page_number == pagination.current_page %} class='active' {% endif %}><a href="{{pagination_item.link}}">{{pagination_item.page_number}}</a>
+      {% endfor_pagination %}
+      <li {% unless pagination.has_next_page %}class="disabled"{%endunless%}><a href="{{pagination.next_page_link}}">&raquo;</a></li>
+    </ul>
+    <p><small>{{pagination.total_count}} properties found</small></p>
 </div>
