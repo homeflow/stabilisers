@@ -1,0 +1,28 @@
+<form action="/user/send_to_friend" method="post">
+  <div class="control-group">
+    <label class="text" for="mailer[from_name]">Your name</label>
+    <input id="mailer[from_name]" name="mailer[from_name]" type="text">
+
+    <label class="text" for="mailer[recipient_name]">Your friend's name</label>
+    <input id="mailer[recipient_name]" name="mailer[recipient_name]" type="text">
+  </div>
+  <div class="control-group">
+    <label class="text" for="mailer[from_email]">Your email</label>
+    <input id="mailer[from_email]" name="mailer[from_email]" type="email">
+
+    <label class="text" for="mailer[recipient_email]">Your friend's email</label>
+    <input id="mailer[recipient_email]" name="mailer[recipient_email]" type="text">
+  </div>
+  <div class="control-group">
+    <label class="text" for="mailer[message]">Message</label>
+    <textarea id="mailer[message]" name="mailer[message]" rows="3"></textarea>
+  </div>
+  <input type="hidden" name="mailer[property_id]" value="{{ property.property_id }}">
+  <input type="hidden" name="mailer[channel]" value="{{ current_channel }}">
+  <div id="additionals" style="display:none;">
+    <input type="text" name="mailer[body]" value="" />
+  </div>
+  <div class="submit">
+    <input name="submit" type="submit" value="SEND">
+  </div>
+</form>
