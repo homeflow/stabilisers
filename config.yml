@@ -1,3 +1,23 @@
 theme:
   name: "Stabilisers"
   type: "agency_theme"
+  cache_for: 30
+  type: "agency_theme"
+  enabled:
+    - "national_search"
+    - "global_branch_search"
+    - "branches_by_distance_on_locations"
+    - "disambiguation"
+    - 'searchable_keyword_lookup'
+  site_content_chunks:
+    - name: 'example_chunk'
+      description: 'A custom example chunk'
+      multiple: true
+  article_topic_exclusions: "news"
+  asset_packs:
+    javascript:
+      - example.js
+    stylesheet:
+      - example.css
+  page_sizes:
+    branches: 100

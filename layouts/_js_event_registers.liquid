@@ -1,0 +1,129 @@
+<script type="text/javascript">
+function show_drawer(name){
+  $("#drawer_extra_dots_" + name).hide();
+  $("#drawer_content_" + name ).show();
+}
+
+function highlight_saved_search(){
+  $("#saved_search_btn").effect("transfer",{ to: $('#user_micro_view #saved_searches_link') }, 800);
+  $('#saved_searches_link').effect('highlight',{color: '#e07719'},2000);
+}
+
+$(document).ready(function(){
+  Ctesius.addConfig('enable_draw_a_map', true);
+  Ctesius.addConfig('enable_user_history', true);
+  Ctesius.addConfig('properties', {% include_as_json properties/properties_list %}.properties)
+  Ctesius.addConfig('flash-message-user-create-successful', 'Thank you for registering. One of our team will be in touch soon!')
+
+  $('#search_form_button').click(function(form){
+    Ctesius.Actions.submitSearchForm();
+    return false;
+  });
+
+  Ctesius.registerEvent('saved_property_view_rendered', function (saved_property){
+    $('#saved_properties_view').removeClass("hidden");
+    $('#mini_property_'+saved_property.id).mouseenter(function(){$('#remove_icon_'+saved_property.id).show()});
+    $('#mini_property_'+saved_property.id).mouseleave(function(){$('#remove_icon_'+saved_property.id).hide()});
+  });
+
+  Ctesius.registerEvent('saved_property_removed', function(saved_property, collection){
+    $("#shortlist_link_" + saved_property.id + " span" ).html("Save to shortlist");
+    $("#shortlist_link_" + saved_property.id).attr("onclick", 'Ctesius.Actions.addSavedProperty('+saved_property.id+'); return false;');
+    if(collection.size() == 0){
+      $('#saved_properties_view').addClass("hidden");
+    }
+  });
+
+  Ctesius.registerEvent('saved_property_added', function(saved_property, collection){
+    $("#shortlist_link_" + saved_property.id + " span").html("Remove from shortlist");
+    $("#shortlist_link_" + saved_property.id).attr("onclick", 'Ctesius.Actions.removeSavedProperty('+saved_property.id+'); return false;');
+  });
+
+  Ctesius.registerEvent('saved_search_removed', function(search, collection){
+    if (search.equalTo(Ctesius.getSearch())){
+      $("#saved_search_btn").html("Save this search")
+      $("#saved_search_btn").attr("onclick", 'Ctesius.Actions.saveCurrentSearch();highlight_saved_search(); return false;')
+    }
+  });
+
+  Ctesius.registerEvent('saved_search_added', function(search, collection){
+    if (search.equalTo(Ctesius.getSearch())){
+      $("#saved_search_btn").html("Remove this search")
+      $("#saved_search_btn").attr("onClick", 'Ctesius.Actions.removeSavedSearch("'+search.search_id()+'");')
+    }
+  });
+
+  Ctesius.registerEvent('after_saved_property_added_by_action', function(saved_property){
+    $("#property_row_"+saved_property.id).effect("transfer",{ to: $("#mini_property_" + saved_property.id) }, 800);
+    $('#saved_properties_link').effect('highlight',{color: '#e07719'},3000);
+  });
+
+
+  var add_branches_link = function(user_history_collection){
+    var last_search = user_history_collection.last()
+    if(last_search != undefined && last_search.get('place') != undefined){
+      var place_id = last_search.get('place').get('place_id')
+      var el = $('a#find_agents')
+      el.attr("href", '/branches' + '?place_id=' + place_id)
+    }
+  }
+
+
+  Ctesius.registerEvent('user_history_search_added', function(user_history_collection){
+    add_branches_link(user_history_collection);
+  });
+
+  Ctesius.registerEvent('user_history_ready', function(user_history_collection){
+    add_branches_link(user_history_collection);
+  });
+  Ctesius.registerEvent('banner', function(){
+    $('#draggable_map_view').append("<div id='bannercontainer'></div>")
+  });
+
+  Ctesius.registerEvent('drawbanner', function(){
+    $('#bannercontainer').append("<div class='mappy' style='position:relative' padding-left='100px'> Click and drag to sketch the area you are interested in.  </div>");
+  });
+
+  Ctesius.registerEvent('editbanner', function(){
+    $('#bannercontainer').append("<div class='mappyedit' style='position:relative' padding-left='100px'>Click and drag a point on the shape to adjust the area. Press save when you are finished editing. </div>");
+  });
+
+  Ctesius.registerEvent('deletebanner', function(){
+    $('#bannercontainer').append("<div class='mappydelete' style='position:relative' padding-left='100px'>Click on an area to delete it.</div>");
+  });
+
+  Ctesius.registerEvent('editbannertoggled', function(){
+    $('.mappyedit').siblings().hide();
+    $('.mappyedit').slideToggle()
+  });
+
+  Ctesius.registerEvent('deletebannertoggled', function(){
+    $('.mappydelete').siblings().hide();
+    $('.mappydelete').slideToggle();
+  });
+
+  Ctesius.registerEvent('drawbannertoggled', function(){
+    $('.mappy').siblings().hide();
+    $('.mappy').slideToggle();
+  });
+
+  Ctesius.registerEvent('before_saved_property_removed_by_action', function(saved_property_id){
+    if($("#mini_property_"+saved_property_id).length>0 && $("#property_row_"+saved_property_id).length>0)
+    $("#mini_property_"+saved_property_id).effect("transfer",{ to: $("#property_row_" + saved_property_id) }, 800);
+    $('#saved_properties_link').effect('highlight',{color: '#e07719'},3000);
+  });
+
+  Ctesius.registerEvent('redirection_flash_ready', function(message, type){
+    var mess = '<div class="alert alert-'+type+'"><a class="close" data-dismiss="alert">×</a>'+message+'</div>'
+    $('#alert_location').html(mess)
+  });
+
+  $(function() {
+    $('input, textarea').placeholder();
+  });
+
+  Ctesius.init();
+
+});
+
+</script>
