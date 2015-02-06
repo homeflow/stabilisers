@@ -1,0 +1,30 @@
+{% raw %}
+  <div class='profile_tab_content hidden' id="profile_tab_saved_properties_content">
+    {% if saved_properties.length == 0 %}
+        <p>You have no properties saved. You can save a property by running a search and clicking the Save to Shortlist button. You can then <a href="#user">sign in or register</a> and we will save these to your account.</p>
+    {% else %}
+        <p>Here are the properties you have saved:</p>
+    {% endif %}
+    <div class='properties'>
+      {% for property in saved_properties %}
+        {% if property.property_id %}
+          <div class='saved_property clearfix'>
+            <a href='{{property.property_url}}'>
+              <img class='thumb' src='{{property.small_photo}}'/>
+            </a>
+            <div class='sp_content'>
+              <h2>{{ property.display_address }}</h2>
+              <ul class="piped">
+                <li>{{property.price}}</li>
+                {% if property.bedrooms %}<li><span>{{ property.bedrooms }} bedrooms</span></li>{% endif %}
+                {% if portal %}<li><a href='{{property.agency_url}}'>{{property.agency_name}}</a></li>{% endif %}
+                <li><a href='{{property.property_url}}'>View property</a></li>
+                <li class="last"><a onclick='Ctesius.Actions.removeSavedProperty({{property.property_id}}); '>Remove saved property</a></li>
+              </ul>
+            </div>
+          </div>
+      {% endif %}
+    {% endfor %}
+    </div>
+  </div>
+{% endraw %}

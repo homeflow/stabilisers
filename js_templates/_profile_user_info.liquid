@@ -1,0 +1,24 @@
+{% raw %}
+	<script id="user_micro_template" type="text/liquid">
+	<ul class="nav-menu-list alt iconify" data-menu="action-menu">
+		{% if user_type ='persisted' %}
+			{% capture name_length %}{{ user.first_name | size }}{% endcapture %}
+			{% if name_length > 10 %}
+				<a href="#user" class="nav-menu-item user tooltip-header" title="Update your account details">Hi, {{user.first_name | truncate :10 }}</a>
+			{% else %}
+				<a href="#user" class="nav-menu-item user tooltip-header" title="Update your account details">Welcome back, {{user.first_name }}</a>
+			{% endif %}
+			<a id="saved_properties_link" class="nav-menu-item icon icon-heart tooltip-header" title="{% if saved_properties.length == 0 %}Save properties you are interested in{% else %}See the properties you have added to your wishlist{% endif %}" href="#/user/saved_properties">Wish list ({{saved_properties.length }})</a>
+			<a id="saved_searches_link" class="nav-menu-item icon icon-save tooltip-header" title="{% if saved_searches.length == 0 %}Set up saved searches and email alerts{% else %}View your saved searches and email alerts{% endif %}" href="#/user/alerts">Saved searches ({{saved_searches.length }})</a>
+			<a class="nav-menu-item icon icon-person" onclick ="Ctesius.Actions.logUserOut()">Sign out</a>
+		{% else %}
+			<a class="nav-menu-item icon icon-person tooltip-header" title="Create an account with us, to save your properties and searches" href="#user">Register or sign in</a>
+			<a id="saved_properties_link" class="nav-menu-item icon icon-heart tooltip-header" title="{% if saved_properties.length == 0 %}Save properties you are interested in{% else %}See the properties you have added to your wishlist{% endif %}" href="#/user/saved_properties">Wish list ({{saved_properties.length }})</a>
+			<a id="saved_searches_link" class="nav-menu-item icon icon-save tooltip-header" title="{% if saved_searches.length == 0 %}Set up saved searches and email alerts{% else %}View your saved searches and email alerts{% endif %}" href="#/user/alerts">Saved searches ({{saved_searches.length }})</a>
+		{% endif %}
+  </ul>
+  <script type="text/javascript">
+    $('.tooltip-header').tooltipster({touchDevices : false} );
+  </scr{{}}ipt>
+</script>
+{% endraw %}

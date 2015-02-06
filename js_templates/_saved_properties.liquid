@@ -1,0 +1,23 @@
+{% raw %}
+	<script id="saved_properties_template" type="text/liquid">
+		<div class="wishlist hidden">
+			<h3>My wish list</h3>
+		    <ul id="favourite_property_list">
+		    </ul>
+	    </div>
+
+    </script>
+
+    <script id="saved_property_template" type="text/liquid">
+		<li class="wishlist-item">
+    		<a href="{{ property.property_url }}">
+		        <img src="{{ property.small_photo }}">
+		        <div class="wishlist-details">
+		        	<h4>{{ property.display_address }}</h4>
+		        	<span class="price">{{ property.price }}</span>
+		        </div>
+		        <div class="close" data-id="{{ property.property_id }}">&#x2A2F;</div>
+	    	</a>
+	    </li>
+    </script>
+{% endraw %}
