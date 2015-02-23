@@ -1,0 +1,13 @@
+{% raw %}
+  <script id="branch_map_pin_template" type="text/liquid">
+    <h1><a href="{{branch.branch_url }}">{{branch.name}}</a></h1>
+    <div id="contact_details">
+      <p>{{branch.address}}</p>
+      {% if branch.sales_enabled %}<a href="{{branch.branch_url }}/sales">
+        View all properties for sale &gt;</a><br/>{% endif %}
+      {% if branch.lettings_enabled %}<a href="{{branch.branch_url }}/lettings">
+        View all properties to let &gt;</a><br>
+      {% endif %}
+    </div>
+  </script>
+{% endraw %}
