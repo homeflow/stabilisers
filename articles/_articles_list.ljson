@@ -1,0 +1,16 @@
+articles :
+{% for article in articles %}
+  -
+    title : {{ article.title |yaml_safe }}
+    content : {{ article.content | yaml_safe }}
+    promo : {{ article.promo | yaml_safe }}
+    slug : {{ article.slug | yaml_safe }}{% if article.promo_image %}
+    promo_image : {{ article.promo_image | url_for_generic_image }}{% endif %}
+{% endfor %}
+pagination :
+    current_page : {{ pagination.current_page }}
+    has_prev_page : {{ pagination.has_prev_page }}
+    total_count : {{ pagination.total_count }}
+    has_next_page : {{ pagination.has_next_page }}
+    from_record : {{ pagination.from_record }}
+    to_record : {{ pagination.to_record}}
