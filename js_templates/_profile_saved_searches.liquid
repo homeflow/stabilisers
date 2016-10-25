@@ -1,49 +1,47 @@
 {% raw %}
-<div class='profile_tab_content hidden' id="profile_tab_alerts_content">
-  <div style="max-width:940px;">
-    {% if saved_searches.length == 0 %}
-        <p>You have no saved searches yet. To save a search, run a search and select the Location drop down, then click the Save Search link. You can then <a href="#user">sign in or register</a> and we will save these to your account.</p>
-    {% else %}
-        <p>Here are the searches and alerts you have saved. You can configure how often we notify you about new properties, visit the results page again or
-          remove the search.</p>
-    {% endif %}
-
-    {% for search in saved_searches %}
-      <div class='saved_search_row'>
-        {% if search.performed_data %}
-          <a href='{{search.link}}'>
-              <img src='{{search.performed_data.properties[0].small_photo}}'/>
-          </a>
-        {% endif %}
-        <a href='{{search.link}}'>
-         <h2 style="font-size:18px">
+  <div class='profile_tab_content hidden' id="profile_tab_alerts_content">
+    <div style="max-width:940px;">
+      {% if user_type == 'local' %}
+        <p>Here are the searches you have saved for later. If you <a href="#user">sign in or register</a> we will save these to your account. By signing in, you will also be able to set up email alerts for new properties matching your saved searches.</p>
+        {% else %}
+        <p>Here are the searches you have saved for later. </p>
+      {% endif %}
+      {% for search in saved_searches %}
+        <div class= 'saved_property' style='z-index:200000000; position:relative; width:880px; float:left; margin-top:10px;'>
           {% if search.performed_data %}
-            Properties {{search.description}}
+            <a href ='{{search.link}}'>
+              <div class='stack{{forloop.index}}'>
+                <img src='{{search.performed_data.properties[0].small_photo}}'/>
+              </div>
+            </a>
           {% endif %}
-          <li class="last"><a onclick='Ctesius.Actions.removeSavedSearch("{{search.search_id}}");'>Remove saved property</a></li>
-        </h2>
-        </a>
-
-        <div class="row2">
-          <div class="alert_form">
-            <label for="alert_freq">Email me matching properties:</label>
-            <select class="alert_frequency" onchange="updateSearch(this)" name="alert_freq">
-              <option {%if search.alert_frequency == 'I'%}selected="selected"{%endif%} value="{{search.search_id}}_I">Immediately</option>
-              <option {%if search.alert_frequency == 'W'%}selected="selected"{%endif%} value="{{search.search_id}}_W">Weekly</option>
-              <option {%if search.alert_frequency == 'M'%}selected="selected"{%endif%} value="{{search.search_id}}_M">Monthly</option>
-              <option {%if search.alert_frequency and search.alert_frequency == 'N'%} selected="selected" {% endif %} value="{{search.search_id}}_N">Never</option>
-            </select>
+          <div class='sp_content' style ='margin-left: 115px; width:600px;'>
+            <h2>
+              {% if search.performed_data %}
+               {{search.performed_data.pagination.total_count}} properties
+              {% else %}
+                Properties
+              {% endif %}
+                {{search.description}}
+            </h2>
+            <div class="right">
+              <ul class='piped'>
+                <li class="orange"> <a class="orange bold" href='{{search.link}}'>Visit</a></li>
+                <li class='last'><a class="orange bold" onclick='Ctesius.Actions.removeSavedSearch("{{search.search_id}}"); '>Delete</a></li>
+              </ul>
+            </div>
+            <div class="alert_settings left">
+              Email matching properties:
+              <select class="alert_frequency" onchange="updateSearch(this)">
+                <option {%if search.alert_frequency == 'I'%}selected="selected"{%endif%} value="{{search.search_id}}_I">Immediately</option>
+                <option {%if search.alert_frequency == 'W'%}selected="selected"{%endif%} value="{{search.search_id}}_W">Weekly</option>
+                <option {%if search.alert_frequency == 'M'%}selected="selected"{%endif%} value="{{search.search_id}}_M">Monthly</option>
+                <option {% unless search.alert_frequency %} selected="selected" {% endunless %} value="{{search.search_id}}_">Never</option>
+              </select>
+            </div>
           </div>
-          <ul>
-            <li> 
-              <a href='{{search.link}}'>Visit</a> or <a href="" onclick='event.preventDefault(); Ctesius.Actions.removeSavedSearch("{{search.search_id}}");'>Delete</a>
-            </li>
-          </ul>
         </div>
+      {% endfor %}
     </div>
-    {% endfor %}
   </div>
-</div>
 {% endraw %}
-
-

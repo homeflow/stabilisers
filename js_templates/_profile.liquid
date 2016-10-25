@@ -1,14 +1,11 @@
 {% raw %}
-<script id="user_profile_template" type="text/liquid">
-  <div style="min-width:940px;" class="profile_lightbox core">
-    <div class="primary_strip">
-        <div class ='row'>
-          <div class="span4"><h1>Welcome, {{ user.first_name}}</h1></div>
-        </div>
-    </div>
-    <div class="secondary_strip">
+  <script id="user_profile_template" type="text/liquid">
+    <div style="min-width:940px;" class="profile_lightbox core">
+      <div class ='row'>
+        <div class="span4"><h1>Welcome, {{ user.first_name}}</h1></div>
+      </div>
       <div class='row'>
-        <ul style='' class="profile_tab_nav">
+        <ul style='' class="profile_tab_nav nav nav-tabs">
           <li id = "profile_tab" class="current">
             <a href="#user">My Profile</a>
           </li>
@@ -16,54 +13,29 @@
             <a href="#/user/saved_properties">Saved Properties ({{saved_properties.length}})</a>
           </li>
           <li id="profile_tab_alerts">
-            <a href="#/user/alerts">Alerts & Searches ({{saved_searches.length}})</a>
-         </li>
+           <a href="#/user/alerts">Alerts & Searches ({{saved_searches.length}})</a>
+          </li>
         </ul>
+        {% if user_type != 'local' %}
+          <a class="logout" href="#" onclick="Ctesius.Actions.logUserOut()">Sign out</a>
+        {%endif%}
       </div>
-    </div>
-    <div class="alert flash_message_container {%unless flash.message %} hidden {%endunless%}">
-      {% if flash.message %}
-        <strong>Warning!</strong> {{flash.message}}</span>
-      {% endif %}
-    </div>
-
-    {% endraw %}
-
-    {% include 'js_templates/profile_account' %}
-
-    {% raw %}
-
-    {% endraw %}
-
-    {% include 'js_templates/profile_forgotten_password' %}
-
-    {% raw %}
-
-    {% endraw %}
-
-    {% include 'js_templates/profile_saved_searches' %}
-
-    {% raw %}
-
-    {% endraw %}
-
-    {% include 'js_templates/profile_saved_properties' %}
-
-    {% include 'js_templates/next_prev_recent_search' %}
-
-    {% raw %}
-
-      <div class='profile_tab_content hidden' id="profile_tab_enquiries_content">
-        Leads
+      <div class="alert flash_message_container {% unless flash.message %} hidden {% endunless %}">
+          {% if flash.message %} 
+            <strong>Warning!</strong> {{flash.message}}</span>
+          {%endif%}
       </div>
-
+      {% endraw %}
+        {% include 'js_templates/profile_account' %}
+        {% include 'js_templates/profile_forgotten_password' %}
+        {% include 'js_templates/profile_saved_searches' %}
+        {% include 'js_templates/profile_saved_properties' %}
+        {% include 'js_templates/next_prev_recent_search' %}
+      {% raw %}
     </div>
-
   </script>
+{% endraw %}
 
 <div id ='user_profile_view' style='display:none;'>
 
 </div>
-{%endraw%}
-
-{% include 'js_templates/next_prev_recent_search' %}

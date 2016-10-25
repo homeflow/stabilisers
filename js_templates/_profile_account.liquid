@@ -1,142 +1,164 @@
 {% raw %}
-<div class='profile_tab_content hidden' id="profile_tab_content">
-{% if user_type == 'local' %}
-  <div class="row">
-    <div class="span5 with_fixed_button" >
-      <form  onsubmit="Ctesius.Actions.createNewUser(this); return false;" class="form-horizontal lv_home_form">
-        <div id="legend" class="">
-          <legend class="">
-            <span class="help-block">Are you new? Create your account here.</span>
-          </legend>
+  <div class='profile_tab_content hidden' id="profile_tab_content">
+    {% if user_type == 'local' %}
+      <div class="row">
+        <div class="span11">
+          <p>By registering or signing in you will be able to set up email alerts based on your saved searches and save individual properties for viewing later.</p>
         </div>
-        <fieldset>
-          <label class="control-label" for="input01">Name</label>
-          <div class="controls ">
-            <input type="text" id="profile_first_name" name="first_name" class="input-mini" placeholder="First"><input type="text" id="profile_last_name" name="last_name" class="input-mini" placeholder="Last">
-          </div>
-          <label class="control-label" for="input01">Email</label>
-          <div class="controls">
-            <input type="text" placeholder="" name ='email' class="input"> 
-          </div>
-          <label class="control-label" for="input01">Contact number</label>
-          <div class="controls">
-            <input type="text" placeholder="" name ='tel_home' class="input">
-          </div>
-          <label class="control-label" for="input01">Password</label>
-          <div class="controls">
-            <input type="password" name='password' placeholder="" class="input">
-          </div>
-          <label class="control-label" for="input01">Confirm password</label>
-          <div class="controls">
-            <input type="password" name='password_confirmation' placeholder="" class="input">
-          </div>
-          <div class="control-group buttoned-control-group">
-            <label class="control-label"></label>
-            <div class="controls">
-              <button type="submit" class="pull-right">Register</button>
+        <div class="span5 with_fixed_button">
+          <form onsubmit="Ctesius.Actions.createNewUser(this); return false;" class="form-horizontal">
+            <div id="legend">
+              <legend>
+                Register
+                <span class="help-block">Are you new? Create your account here.</span>
+              </legend>
             </div>
-          </div>
-        </fieldset>
-      </form>
-    </div>
-    <div class="span5 with_fixed_button">
-      <form onsubmit="Ctesius.Actions.logUserIn(this); return false;" class="form-horizontal lv_home_form">
-        <div id="legend" class="">
-         <legend class="">
-           <span class="help-block">Already have an account?</span>
-         </legend>
-        </div>
-        <fieldset>
-          <label class="control-label" for="input01">Email</label>
-          <div class="controls">
-            <input type="text" placeholder="" name ='username' class="input">
-          </div>
-          <label class="control-label" for="input01">Password</label>
-          <div class="controls">
-            <input  name='password' type="password" placeholder="" class="input">
-          </div>
-          <div class='controls password'><p><a href='#user/forgotten_password'>Forgotten Password?</a></p></div>
-          <div class="control-group buttoned-control-group">
-            <div class="controls pull-right">
-              <button type="submit">Sign In</button>
-            </div>
-          </div>
-        </fieldset>
-      </form>
-    </div>
-    <div class="help_text">
-      <p>
-        {% endraw %}<img src="{{ "2c_info.png" | theme_image_url}}" height="50" width="50" />{% raw %}
-        By registering or signing in you will be able to set up email alerts 
-        based on your saved searches and save individual properties for viewing later.
-      </p>
-    </div>
-  </div> <!-- end row -->
-{% else %}
-  <div class="row">
-    <div class="span6 offset1" >
-      <div id="legend_container" class="">
-        <legend class="">
-          {% if user.avatar? %}
-            {% endraw %}<img class="avatar" src="{{ user.avatar | theme_image_url : "70x_" }}">{% raw %}
-          {% else %}
-            {% endraw %}<img class="avatar" src="{{ "150x150-avatar.png" | theme_image_url }}" height="70" width="70">{% raw %}
-          {% endif %}
-            <h2>My Profile</h2>
-            <span class="help-block">Something changed? <a onclick='javascript: $("#user_update_form").removeClass("hidden"); $("#user_details").addClass("hidden");'>Edit your profile.</a></span>
-        </legend>
-      </div>
-      <div id='user_update_form' class='hidden'>
-        <form onsubmit="Ctesius.Actions.updateUser(this); return false;" class="form-horizontal lv_edit_form">
-          <fieldset>
-            <label class="control-label" for="input01">Name</label>
-            <div class="controls ">
-              <input type="text" name="first_name" id="profile_first_name" value="{{user.first_name}}" class="input-mini" placeholder="First">
-              <input type="text" name="last_name" id="profile_last_name" value="{{user.last_name}}" class="input-mini" placeholder="Last">
-            </div>
-            <label class="control-label" for="input01">Email</label>
-            <div class="controls">
-              <input type="text" placeholder="" name ='email' value="{{user.email}}" class="input">
-            </div>
-            <label class="control-label" for="input01">Telephone</label>
-            <div class="controls">
-              <input type="text" placeholder="" name ='tel_home' value="{{user.tel_home}}" class="input">
-            </div>
-            <label class="control-label" for="input01">Street Address</label>
-            <div class="controls">
-              <input type="text" value="{{user.street_address}}" name ='street_address' class="input">
-            </div>
-            <label class="control-label" for="input01">Town</label>
-            <div class="controls">
-              <input type="text" value="{{user.town}}" name ='town' class="input">
-            </div>
-            <label class="control-label" for="input01">County</label>
-            <div class="controls">
-              <input type="text" value="{{user.county}}" name ='county' class="input">
-            </div>
-            <label class="control-label" for="input01">Postcode</label>
-            <div class="controls">
-              <input type="text" value="{{user.postcode}}" name ='postcode' class="input">
-            </div>
-            <div class="control-group buttoned-control-group">
-              <div class="controls">
-                <button type="submit">Update</button>
+            <fieldset>
+              <label class="control-label" for="input01">Name</label>
+              <div class="controls ">
+                <input type="text" id="profile_first_name" name="first_name" class="input-mini" placeholder="First"><input type="text" id="profile_last_name" name="last_name" class="input-mini" placeholder="Last">
+                <p class="help-block"></p>
               </div>
+              <label class="control-label" for="input01">Email</label>
+              <div class="controls">
+                <input type="text" placeholder="" name ='email' class="input">
+                <p class="help-block"></p>
+              </div>
+              <label class="control-label" for="input01">Contact number</label>
+              <div class="controls">
+                <input type="text" placeholder="" name ='tel_home' class="input">
+                <p class="help-block"></p>
+              </div>
+              <label class="control-label" for="input01">Password</label>
+              <div class="controls">
+                <input type="password" name='password' placeholder="" class="input">
+                <p class="help-block"></p>
+              </div>
+              <label class="control-label" for="input01">Confirm password</label>
+              <div class="controls">
+                <input type="password" name='password_confirmation' placeholder="" class="input">
+                <p class="help-block"></p>
+              </div>
+              <div class="control-group buttoned-control-group">
+                <label class="control-label"></label>
+                <div class="controls">
+                  <input type="submit" value="Register" class="btn btn-primary pull-right">
+                </div>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+        <div class="span5 with_fixed_button">
+          <form onsubmit="Ctesius.Actions.logUserIn(this); return false;" class="form-horizontal">
+            <div id="legend">
+             <legend class="">Sign in
+               <span class="help-block">Already have an account?</span>
+             </legend>
             </div>
-          </fieldset>
-        </form>
-      </div>
-      <div id='user_details'>
-        <dl class='dl-horizontal'>
-          <dt>Name</dt>  <dd>{{user.first_name}} {{user.last_name }}</dd>
-          <dt>Email</dt> <dd>{{user.email}}</dd>
-          <form style="display:none" id='tel_mini_form'><pre class="tip">hello world</pre></form>
-          <dt>Telephone</dt> <dd>{%if user.tel_home %}{{user.tel_home}}{% else %}<a onclick='javascript: $("#user_update_form").removeClass("hidden"); $("#user_details").addClass("hidden"); '>Click here to add your telephone number.</a>{% endif %}
-          <dt>Address</dt> <dd>{%if user.address_html %}{{user.address_html}}{% else %}<a onclick='javascript: $("#user_update_form").removeClass("hidden"); $("#user_details").addClass("hidden");'>Click here to add your address.</a>{% endif %}
-        </dl>
-      </div>
-    </div><!-- end span5 -->
-  </div> <!-- end row -->
-{% endif %}
-</div>
+            <fieldset>
+              <label class="control-label" for="input01">Email</label>
+              <div class="controls">
+                <input type="text" placeholder="" name ='username' class="input">
+                <p class="help-block"></p>
+              </div>
+              <label class="control-label" for="input01">Password</label>
+              <div class="controls">
+                <input  name='password' type="password" placeholder="" class="input">
+                <p class="help-block"></p>
+              </div>
+              <div class='controls'><p><a href='#user/forgotten_password'>Forgotten Password?</a></p></div>
+              <div class="control-group buttoned-control-group">
+                <div class="controls pull-right">
+                  <input type="submit" value="Sign In" class="btn btn-primary">
+                </div>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div> <!-- end row -->
+    {% else %}
+      <div class="row">
+        <div class="span6 offset1">
+           <div id="legend_container">
+            <legend class="">
+              <img class="avatar" src="{{ "/assets/150x150-avatar.png" | theme_image_url }}">
+              <h2>My Profile</h2>
+              <span class="help-block">Something changed? <a onclick='javascript: $("#user_update_form").removeClass("hidden"); $("#user_details").addClass("hidden");'>Edit your profile.</a></span>
+            </legend>
+          </div>
+          <div id='user_update_form' class='hidden'>
+            <form onsubmit="Ctesius.Actions.updateUser(this); return false;" class="form-horizontal">
+              <fieldset>
+                <label class="control-label" for="input01">Name</label>
+                <div class="controls ">
+                  <input type="text" name="first_name" id="profile_first_name" value="{{user.first_name}}" class="input-mini" placeholder="First">
+                  <input type="text" name="last_name" id="profile_last_name" value="{{user.last_name}}" class="input-mini" placeholder="Last">
+                  <p class="help-block"></p>
+                </div>
+                <label class="control-label" for="input01">Email</label>
+                <div class="controls">
+                  <input type="text" placeholder="" name ='email' value="{{user.email}}" class="input">
+                  <p class="help-block"></p>
+                </div>
+                <label class="control-label" for="input01">Telephone</label>
+                <div class="controls">
+                  <input type="text" placeholder="" name ='tel_home' value="{{user.tel_home}}" class="input">
+                  <p class="help-block"></p>
+                </div>
+                <label class="control-label" for="input01">Street Address</label>
+                <div class="controls">
+                  <input type="text" value="{{user.street_address}}" name ='street_address' class="input">
+                </div>
+                <p class="help-block"></p>
+                <label class="control-label" for="input01">Town</label>
+                <div class="controls">
+                  <input type="text" value="{{user.town}}" name ='town' class="input">
+                </div>
+                <p class="help-block"></p>
+                <label class="control-label" for="input01">County</label>
+                <div class="controls">
+                  <input type="text" value="{{user.county}}" name ='county' class="input">
+                </div>
+                <p class="help-block"></p>
+                <label class="control-label" for="input01">Postcode</label>
+                <div class="controls">
+                  <input type="text" value="{{user.postcode}}" name ='postcode' class="input">
+                  <p class="help-block"></p>
+                </div>
+                <div class="control-group buttoned-control-group">
+                  <div class="controls pull-right">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+          <div id='user_details'>
+            <dl class='dl-horizontal'>
+              <dt>Name</dt> <dd>{{user.first_name}} {{user.last_name }}</dd>
+              <dt>Email</dt> <dd>{{user.email}}</dd>
+              <dt>Telephone</dt> 
+              <dd>
+                {% if user.tel_home %}
+                  {{user.tel_home}}
+                {% else %}
+                  <a onclick='javascript: $("#user_update_form").removeClass("hidden"); $("#user_details").addClass("hidden"); '>
+                    Click here to add your telephone number.
+                  </a>
+                {% endif %}
+              </dd>
+              <dt>Address</dt> 
+              <dd>
+                {% if user.address_html %}
+                  {{user.address_html}}
+                {% else %}
+                  <a onclick='javascript: $("#user_update_form").removeClass("hidden"); $("#user_details").addClass("hidden");'>Click here to add your address.</a>
+                {% endif %}
+              </dd>
+            </dl>
+          </div>
+        </div><!-- end span5 -->
+      </div> <!-- end row -->
+    {% endif %}
+  </div>
 {% endraw %}

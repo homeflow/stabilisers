@@ -1,0 +1,16 @@
+{% raw %}
+  <script id="next_and_previous_property_template" type="text/liquid">
+    {% if previous_property %}
+      <a href ='{{ previous_property.property_url }}' class="previous">Previous<span> Property</span></a>
+    {% endif %}
+    {% if next_property %}
+      <a href ='{{ next_property.property_url }}' class="next">Next<span> Property</span></a>
+    {% endif %}
+  </script>
+{% endraw %}
+
+{% raw %}
+  <script id="most_recent_search_template" type="text/liquid">
+    <a href="{{search.link}}" class="back-to-search-link">Back<span> to search</span></a>
+  </script>
+{% endraw %}

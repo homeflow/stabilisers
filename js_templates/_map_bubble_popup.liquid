@@ -1,0 +1,12 @@
+{% raw %}
+  <script id="property_map_pin_template" type="text/liquid">
+    <p>
+      <img style='width:120px;' src='{{property.photo}}'/><br/>
+      {% if property.bedrooms %}
+        {{property.bedrooms}} bed - 
+      {% endif %}
+      {{property.price}} <br/>
+      <a href='{{property.property_url}}'>{{property.display_address}}</a>
+    </p>
+  </script>
+{% endraw %}

@@ -1,23 +1,21 @@
 {% raw %}
-	<script id="saved_properties_template" type="text/liquid">
-		<div class="wishlist hidden">
-			<h3>My wish list</h3>
-		    <ul id="favourite_property_list">
-		    </ul>
-	    </div>
-
-    </script>
-
-    <script id="saved_property_template" type="text/liquid">
-		<li class="wishlist-item">
-    		<a href="{{ property.property_url }}">
-		        <img src="{{ property.small_photo }}">
-		        <div class="wishlist-details">
-		        	<h4>{{ property.display_address }}</h4>
-		        	<span class="price">{{ property.price }}</span>
-		        </div>
-		        <div class="close" data-id="{{ property.property_id }}">&#x2A2F;</div>
-	    	</a>
-	    </li>
-    </script>
+  <script id="saved_properties_template" type="text/liquid">
+    <div style="height: 100%;" id="shortlist" class="block nomargin">
+      <h2>My Property Shortlist</h2>
+      <div id='favourite_property_list'></div>
+    </div>
+  </script>
+  <script id="saved_property_template" type="text/liquid">
+    <div id="mini_property_{{property.property_id}}" class="mini_property mini_property_{{property.property_id}} clearfix" style="position:relative;">
+      <img src="/assets/delete.png" id="remove_icon_{{property.property_id}}" class="remove_icon" onclick="javascript:Ctesius.Actions.removeSavedProperty({{property.property_id}})">
+      <a href="{{property.property_url}}"><img src="{{ property.photo }}"></a>
+      <div id="featured_property_data">
+        <ul>
+          <li>{{ property.bedrooms }} bedrooms</li>
+          <li><strong>{{ property.price }}</strong></li>
+          <li>{{ property.display_address }}</li>
+        </ul>
+      </div>
+    </div>
+  </script>
 {% endraw %}
